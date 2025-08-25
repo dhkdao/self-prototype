@@ -1,7 +1,6 @@
 {
-  "name": "web",
+  "name": "@dhkdao-self/web",
   "version": "0.1.0",
-  "private": true,
   "type": "module",
   "scripts": {
     "dev": "next dev",
@@ -29,5 +28,6 @@
     "eslint-config-next": "15.4.6",
     "tailwindcss": "^4",
     "typescript": "^5"
-  }
+  },
+  "packageManager": "pnpm@10.14.0"
 }
