@@ -3,17 +3,15 @@
 import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
 import { getUniversalLink } from "@selfxyz/core";
+import { ConnectKitButton } from "connectkit";
 import {
   SelfAppBuilder,
   SelfQRcodeWrapper,
   type SelfApp
 } from "@selfxyz/qrcode";
+import { clsx } from 'clsx';
+import { useAccount } from 'wagmi';
 import { zeroAddress } from 'viem';
-
-// const SelfQRcodeWrapper = dynamic(
-//   () => import('@selfxyz/qrcode').then(mod => mod.SelfQRcodeWrapper),
-//   { ssr: false }
-// );
 
 export default function Home() {
 
@@ -30,11 +28,14 @@ export default function Home() {
 }
 
 function VerificationComponent() {
+  const account = useAccount();
   const [selfApp, setSelfApp] = useState<SelfApp>();
   const [universalLink, setUniversalLink] = useState("");
-  const [userId] = useState(zeroAddress);
+  const [message, setMessage] = useState('');
 
   useEffect(() => {
+    if (!account.address) return;
+
     try {
       const app = new SelfAppBuilder({
         // Contract integration settings
@@ -47,8 +48,8 @@ function VerificationComponent() {
         appName: process.env.NEXT_PUBLIC_SELF_APP_NAME || "",
         scope: process.env.NEXT_PUBLIC_SELF_SCOPE_SEED || "",
         logoBase64: "https://i.postimg.cc/mrmVf9hm/self.png",
-        userId: userId,
-        userDefinedData: "DHK dao self-prototype",
+        userId: account.address,
+        userDefinedData: message,
         disclosures: {
           /* 1. what you want to verify from users' identity */
           minimumAge: 18,
@@ -71,7 +72,7 @@ function VerificationComponent() {
     } catch (error) {
       console.error("Failed to initialize Self app:", error);
     }
-  }, [userId]);
+  }, [account, message]);
 
   const handleSuccessfulVerification = () => {
     console.log("Verification successful!");
@@ -83,27 +84,56 @@ function VerificationComponent() {
     }
   };
   return (
-    <div className="verification-container">
-      <h1>Verify Your Identity</h1>
-      <p>Scan this QR code with the Self app</p>
+    <div className="verification-container flex flex-col items-center">
+      <h1 className="text-lg/8 font-medium">DHK dao Self Prototype</h1>
 
-      {selfApp && SelfQRcodeWrapper ? (
-        <div className="flex flex-col">
-          <SelfQRcodeWrapper
-            selfApp={selfApp}
-            size={150}
-            onSuccess={handleSuccessfulVerification}
-            onError={() => {
-              console.error("Error: Failed to verify identity");
-            }}
-          />
-          <button className="mt-4 mx-auto" onClick={openSelfApp}>
-            Open Self App
-          </button>
-        </div>
-      ) : (
-        <div>Loading QR Code...</div>
-      )}
+      <section className="flex flex-col items-center my-4">
+        <p className="text-base/8">1. Sign in with your wallet</p>
+        <ConnectKitButton />
+      </section>
+
+      { account.address && (<section className="flex flex-col items-center">
+        <p className="text-base/8">2. Scan the QR code to verify you are a human</p>
+
+        {selfApp && SelfQRcodeWrapper ? (
+          <div className="flex flex-col">
+            <InputTextBox
+              value={message}
+              onChange={setMessage}
+              placeholder="Additional message"
+            />
+            <SelfQRcodeWrapper
+              selfApp={selfApp}
+              size={150}
+              onSuccess={handleSuccessfulVerification}
+              onError={() => {
+                console.error("Error: Failed to verify identity");
+              }}
+            />
+            <button className="mt-4 mx-auto bg-transparent text-blue-600 underline hover:text-blue-800 hover:underline p-0 border-0 font-normal" onClick={openSelfApp}>
+              Open Self App
+            </button>
+          </div>
+        ) : (
+          <div>Loading QR Code...</div>
+        )}
+      </section>)}
     </div>
+  );
+}
+
+function InputTextBox({ value, onChange, placeholder = '', ...props }) {
+  return (
+    <input
+      className={clsx(
+        'mt-3 block w-full rounded-lg border-none bg-gray-100 px-3 py-1.5 text-sm/6 text-black',
+        'focus:outline-2 focus:outline-blue-300'
+      )}
+      type="text"
+      value={value}
+      onChange={e => onChange(e.target.value)}
+      placeholder={placeholder}
+      {...props}
+    />
   );
 }
