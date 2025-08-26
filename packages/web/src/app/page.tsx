@@ -45,10 +45,10 @@ function VerificationComponent() {
 
         // app details
         appName: process.env.NEXT_PUBLIC_SELF_APP_NAME || "",
-        scope: process.env.NEXT_PUBLIC_SELF_SCOPE_ID || "",
+        scope: process.env.NEXT_PUBLIC_SELF_SCOPE_SEED || "",
         logoBase64: "https://i.postimg.cc/mrmVf9hm/self.png",
         userId: userId,
-        userDefinedData: "Bonjour Cannes!",
+        userDefinedData: "DHK dao self-prototype",
         disclosures: {
           /* 1. what you want to verify from users' identity */
           minimumAge: 18,

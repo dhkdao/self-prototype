@@ -8,7 +8,7 @@
     "dev": "pnpm build && conc -n 'node,deploy' -c auto 'pnpm node' 'pnpm deploy:dev'",
     "node": "anvil -f https://alfajores-forno.celo-testnet.org/",
     "test": "forge test",
-    "deploy:dev": "wait-on -t 10s tcp:localhost:8545 && forge script script/SelfVerification.s.sol --rpc-url http://localhost:8545 --broadcast",
+    "deploy:dev": "wait-on -t 10s tcp:localhost:8545 && forge script script/DeploySelfVerification.s.sol --rpc-url http://localhost:8545 --broadcast",
     "listenEvents": "tsx lib/listenEvents.ts"
   },
   "keywords": [],

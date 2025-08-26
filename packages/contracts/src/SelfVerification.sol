@@ -70,4 +70,12 @@ contract SelfVerification is SelfVerificationRoot, Ownable {
     function setConfigId(bytes32 configId) external onlyOwner {
         verificationConfigId = configId;
     }
+
+    /**
+     * @notice Expose the internal _setScope function for testing
+     * @param newScope The new scope value to set
+     */
+    function setScope(uint256 newScope) external onlyOwner {
+        _setScope(newScope);
+    }
 }
