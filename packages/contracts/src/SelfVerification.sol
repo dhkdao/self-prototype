@@ -6,16 +6,13 @@ import {ISelfVerificationRoot} from "@selfxyz/contracts/contracts/interfaces/ISe
 import {Ownable} from "solady/auth/Ownable.sol";
 
 contract SelfVerification is SelfVerificationRoot, Ownable {
-    // Store verification status for each user
-    mapping(address => bool) public verifiedHumans;
+    // Store no, of times a wallet owner has been verified with a valid ID
+    mapping(address => uint32) public verifiedHumans;
     bytes32 public verificationConfigId;
     address public lastUserAddress;
 
     // Event to track successful verifications
-    event VerificationCompleted(
-        ISelfVerificationRoot.GenericDiscloseOutputV2 output,
-        bytes userData
-    );
+    event VerificationCompleted(address indexed sender, string indexed nationality, bytes userData);
 
     /**
      * @notice Constructor for the contract
@@ -42,10 +39,11 @@ contract SelfVerification is SelfVerificationRoot, Ownable {
         ISelfVerificationRoot.GenericDiscloseOutputV2 memory output,
         bytes memory userData
     ) internal override {
-        lastUserAddress = address(uint160(output.userIdentifier));
-        verifiedHumans[lastUserAddress] = true;
+        address userId = address(uint160(output.userIdentifier));
+        string memory nationality = output.nationality;
+        verifiedHumans[userId] += 1;
 
-        emit VerificationCompleted(output, userData);
+        emit VerificationCompleted(userId, nationality, userData);
 
         // Add your custom logic here:
         // - Mint NFT to verified user
@@ -55,9 +53,9 @@ contract SelfVerification is SelfVerificationRoot, Ownable {
     }
 
     function getConfigId(
-        bytes32 _destinationChainId,
-        bytes32 _userIdentifier,
-        bytes memory _userDefinedData
+        bytes32 /* _destinationChainId */,
+        bytes32 /* _userIdentifier */,
+        bytes memory /* _userDefinedData */
     ) public view override returns (bytes32) {
         return verificationConfigId;
     }
@@ -65,11 +63,11 @@ contract SelfVerification is SelfVerificationRoot, Ownable {
     /**
      * @notice Check if an address is a verified human
      */
-    function isVerifiedHuman(address _user) external view returns (bool) {
-        return verifiedHumans[_user];
+    function isVerifiedHuman(address user) external view returns (bool) {
+        return verifiedHumans[user] > 0;
     }
 
-    function setConfigId(bytes32 _configId) external onlyOwner {
-        verificationConfigId = _configId;
+    function setConfigId(bytes32 configId) external onlyOwner {
+        verificationConfigId = configId;
     }
 }

@@ -6,7 +6,9 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "ngrok": "ngrok http --url=burro-concise-regularly.ngrok-free.app 3000",
+    "tunnel": "concurrently -n 'next,ngrok' -c auto 'pnpm dev' 'pnpm ngrok'"
   },
   "dependencies": {
     "@selfxyz/common": "^0.0.7",
@@ -16,7 +18,7 @@
     "next": "14.2.30",
     "react": "^18",
     "react-dom": "^18",
-    "viem": "^2.33.3"
+    "viem": "catalog:"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",
@@ -24,6 +26,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "concurrently": "catalog:",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
     "tailwindcss": "^4",
