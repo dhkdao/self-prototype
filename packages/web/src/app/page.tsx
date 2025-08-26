@@ -37,15 +37,18 @@ function VerificationComponent() {
   useEffect(() => {
     try {
       const app = new SelfAppBuilder({
+        // Contract integration settings
+        endpoint: process.env.NEXT_PUBLIC_VERIFICATION_DEPLOYED_ADDR,
+        endpointType: "staging_celo",
+        userIdType: "hex",
         version: 2,
+
+        // app details
         appName: process.env.NEXT_PUBLIC_SELF_APP_NAME || "",
-        scope: process.env.NEXT_PUBLIC_SELF_SCOPE || "",
-        endpoint: `${process.env.NEXT_PUBLIC_SELF_ENDPOINT}`,
+        scope: process.env.NEXT_PUBLIC_SELF_SCOPE_SEED || "",
         logoBase64: "https://i.postimg.cc/mrmVf9hm/self.png",
         userId: userId,
-        endpointType: "staging_https",
-        userIdType: "hex",
-        userDefinedData: "Bonjour Cannes!",
+        userDefinedData: "DHK dao self-prototype",
         disclosures: {
           /* 1. what you want to verify from users' identity */
           minimumAge: 18,

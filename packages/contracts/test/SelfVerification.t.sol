@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: UNLICENSED
 pragma solidity ^0.8.28;
 
-import {Test, console} from "forge-std/Test.sol";
+import {Test} from "forge-std/Test.sol";
 import {SelfVerification} from "../src/SelfVerification.sol";
 
 contract SelfVerificationTest is Test {
@@ -15,7 +15,7 @@ contract SelfVerificationTest is Test {
         sv = new SelfVerification(idHubAddr, scope, configId);
     }
 
-    function test_ConfigId() public {
+    function test_ConfigId() view public {
         bytes32 chainId = bytes32(0);
         bytes32 userId = bytes32(0);
         bytes memory data = bytes("0x");

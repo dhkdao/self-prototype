@@ -4,15 +4,25 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "forge test"
+    "build": "forge build",
+    "dev": "pnpm build && conc -n 'node,deploy' -c auto 'pnpm node' 'pnpm deploy:dev'",
+    "node": "anvil -f https://alfajores-forno.celo-testnet.org/",
+    "test": "forge test",
+    "deploy:dev": "wait-on -t 10s tcp:localhost:8545 && forge script script/DeploySelfVerification.s.sol --rpc-url http://localhost:8545 --broadcast",
+    "listenEvents": "tsx lib/listenEvents.ts"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "packageManager": "pnpm@10.14.0",
-  "dependencies": {
+  "devDependencies": {
     "@selfxyz/contracts": "^1.2.0",
+    "concurrently": "catalog:",
+    "dotenv": "catalog:",
+    "viem": "catalog:",
     "forge-std": "github:foundry-rs/forge-std#v1.10.0",
-    "solady": "^0.1.24"
+    "solady": "^0.1.24",
+    "tsx": "catalog:",
+    "wait-on": "catalog:"
   }
 }

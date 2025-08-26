@@ -5,6 +5,9 @@ out/
 # Ignores development broadcast logs
 !/broadcast
 /broadcast/*/31337/
+
+# Celo Alfajores Testnet
+/broadcast/*/44787/
 /broadcast/**/dry-run/
 
 # Docs
