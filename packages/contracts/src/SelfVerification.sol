@@ -9,10 +9,9 @@ contract SelfVerification is SelfVerificationRoot, Ownable {
     // Store no, of times a wallet owner has been verified with a valid ID
     mapping(address => uint32) public verifiedHumans;
     bytes32 public verificationConfigId;
-    address public lastUserAddress;
 
     // Event to track successful verifications
-    event VerificationCompleted(address indexed sender, string indexed nationality, bytes userData);
+    event VerificationCompleted(address indexed sender, string indexed nationality, uint32 times, bytes userData);
 
     /**
      * @notice Constructor for the contract
@@ -43,7 +42,7 @@ contract SelfVerification is SelfVerificationRoot, Ownable {
         string memory nationality = output.nationality;
         verifiedHumans[userId] += 1;
 
-        emit VerificationCompleted(userId, nationality, userData);
+        emit VerificationCompleted(userId, nationality, verifiedHumans[userId], userData);
 
         // Add your custom logic here:
         // - Mint NFT to verified user
