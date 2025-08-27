@@ -1,5 +1,6 @@
-"use client"
+"use client";
 
+import React from "react";
 import { WagmiProvider, createConfig, webSocket } from "wagmi";
 import { celoAlfajores } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -16,7 +17,8 @@ export const ckConfig = getDefaultConfig({
   },
 
   // Required API Keys
-  walletConnectProjectId: process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID,
+  walletConnectProjectId:
+    process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "",
 
   // Required App Info
   appName: "DHK dao self-prototype",
@@ -28,15 +30,14 @@ export const ckConfig = getDefaultConfig({
 });
 
 const config = createConfig(ckConfig);
-
 const queryClient = new QueryClient();
 
-export const Web3Provider = ({ children }) => {
+export const Web3Provider = ({ children }: { children: React.ReactNode }) => {
   return (
     <WagmiProvider config={config}>
       <QueryClientProvider client={queryClient}>
         <ConnectKitProvider>{children}</ConnectKitProvider>
       </QueryClientProvider>
     </WagmiProvider>
-  )
-}
+  );
+};

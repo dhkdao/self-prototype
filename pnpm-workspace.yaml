@@ -4,6 +4,7 @@ packages:
 catalog:
   concurrently: ^9.2.1
   dotenv: ^17.2.1
+  prettier: ^3.6.2
   tsx: ^4.20.5
   viem: ^2.33.3
   wait-on: ^8.0.4

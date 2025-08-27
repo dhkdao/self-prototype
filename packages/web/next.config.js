@@ -4,7 +4,7 @@ const nextConfig = {
   compiler: {
     styledComponents: true,
   },
-  webpack: (config, {isServer}) => {
+  webpack: (config, { isServer }) => {
     if (isServer) {
       config.externals = [...(config.externals || []), "@selfxyz/qrcode"];
     }
