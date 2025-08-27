@@ -11,6 +11,7 @@
     "tunnel": "concurrently -n 'next,ngrok' -c auto 'pnpm dev' 'pnpm ngrok'"
   },
   "dependencies": {
+    "@headlessui/react": "^2.2.7",
     "@selfxyz/common": "^0.0.7",
     "@selfxyz/core": "^1.0.8",
     "@selfxyz/qrcode": "^1.0.11",
@@ -33,6 +34,7 @@
     "concurrently": "catalog:",
     "eslint": "^9",
     "eslint-config-next": "15.4.6",
+    "pino-pretty": "^13.1.1",
     "tailwindcss": "^4",
     "typescript": "^5"
   },

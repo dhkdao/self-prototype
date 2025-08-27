@@ -1,12 +1,15 @@
 packages:
   - packages/*
+
 catalog:
-  concurrently: "^9.2.1"
-  dotenv: "^17.2.1"
-  tsx: "^4.20.5"
-  wait-on: ^8.0.4
+  concurrently: ^9.2.1
+  dotenv: ^17.2.1
+  tsx: ^4.20.5
   viem: ^2.33.3
+  wait-on: ^8.0.4
+
 onlyBuiltDependencies:
   - '@tailwindcss/oxide'
+  - blake-hash
   - sharp
   - unrs-resolver
