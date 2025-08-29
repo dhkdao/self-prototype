@@ -51,6 +51,15 @@ contract SelfVerification is SelfVerificationRoot, Ownable {
         // - etc.
     }
 
+    function testVerificationCompletedEvent(
+        address userId,
+        string memory nationality,
+        bytes memory userData
+    ) external onlyOwner {
+        verifiedHumans[userId] += 1;
+        emit VerificationCompleted(userId, nationality, verifiedHumans[userId], userData);
+    }
+
     function getConfigId(
         bytes32 /* _destinationChainId */,
         bytes32 /* _userIdentifier */,

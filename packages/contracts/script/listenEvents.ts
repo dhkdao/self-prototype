@@ -17,7 +17,13 @@ console.log(`Listening to on-chain events\nrpc-url: ${RPC_URL}, address: ${contr
 const unwatch = publicClient.watchEvent({
   address: contractAddress,
   events: parseAbi([
-    'event VerificationCompleted(address indexed sender, string indexed nationality, bytes userData)'
+    'event VerificationCompleted(address indexed sender, string indexed nationality, uint32 times, bytes userData)'
   ]),
-  onLogs: (logs) => console.log(logs)
+  onLogs: (logs) => {
+    for (const [i, log] of logs.entries()) {
+      console.log(`-- event ${i} --`);
+      console.log(`name: ${log.eventName}`);
+      console.log(`args:`, log.args);
+    }
+  }
 });

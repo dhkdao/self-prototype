@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
-import { GeistSans, GeistMono } from "geist/font";
+import { GeistSans } from "geist/font/sans";
+import { GeistMono } from "geist/font/mono";
 import { Web3Provider } from "@/components/Web3Provider";
 import "./globals.css";
 

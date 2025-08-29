@@ -9,7 +9,8 @@ import {
   type SelfApp,
 } from "@selfxyz/qrcode";
 import { clsx } from "clsx";
-import { useAccount } from "wagmi";
+import { useAccount, useConfig } from "wagmi";
+import { watchContractEvent } from "wagmi/actions";
 import {
   Button,
   Field,
@@ -18,6 +19,8 @@ import {
   DialogPanel,
   DialogTitle,
 } from "@headlessui/react";
+
+import { appName, selfVerificationContract } from "@/config";
 
 export default function Home() {
   return (
@@ -34,7 +37,9 @@ function VerificationComponent() {
   const [selfApp, setSelfApp] = useState<SelfApp>();
   const [universalLink, setUniversalLink] = useState("");
   const [message, setMessage] = useState("");
-  const [isOpenDialog, setOpenDialog] = useState(false);
+  const [isDialogOpen, setDialogOpen] = useState(false);
+  const [unwatch, setUnwatch] = useState<() => void>();
+  const config = useConfig();
 
   const openDialog = () => {
     if (!account.address) return;
@@ -48,7 +53,7 @@ function VerificationComponent() {
         version: 2,
 
         // app details
-        appName: process.env.NEXT_PUBLIC_SELF_APP_NAME || "",
+        appName,
         scope: process.env.NEXT_PUBLIC_SELF_SCOPE_SEED || "",
         logoBase64: "https://i.postimg.cc/mrmVf9hm/self.png",
         userId: account.address,
@@ -72,24 +77,69 @@ function VerificationComponent() {
 
       setSelfApp(app);
       setUniversalLink(getUniversalLink(app));
-      setOpenDialog(true);
     } catch (error) {
       console.error("Failed to initialize Self app:", error);
+      return;
     }
+
+    setDialogOpen(true);
+
+    // watch for VerificationCompleted event
+    console.log("watching...");
+    console.log("address:", account.address);
+    console.log("config:", config);
+
+    const { abi, address } = selfVerificationContract;
+    const unwatch = watchContractEvent(config, {
+      abi,
+      address,
+      eventName: "VerificationCompleted",
+      args: {
+        sender: account.address,
+      },
+      onLogs(logs) {
+        console.log("Event received", logs);
+      },
+    });
+
+    setUnwatch(unwatch);
   };
 
   const closeDialog = () => {
-    setOpenDialog(false);
+    setDialogOpen(false);
     setTimeout(() => {
       setSelfApp(undefined);
       setUniversalLink("");
+      if (unwatch) {
+        unwatch();
+        setUnwatch(undefined);
+      }
     }, 1500);
   };
 
-  const handleSuccessfulVerification = () => {
+  const handleSuccessfulVerification = async () => {
     console.log("Verification successful!");
     closeDialog();
+
     // call backend function check api
+    try {
+      const res = await fetch("/api/verify-successful", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          address: account.address,
+          message,
+        }),
+      });
+
+      if (!res.ok) throw new Error("API request failed");
+
+      console.log("result:", res.json());
+    } catch (err) {
+      console.error("Error calling verify-successful API:", err);
+    }
   };
 
   const openSelfApp = () => {
@@ -143,7 +193,7 @@ function VerificationComponent() {
       </div>
       <Dialog
         as="div"
-        open={isOpenDialog}
+        open={isDialogOpen}
         onClose={closeDialog}
         className="relative z-10 focus:outline-none"
       >
