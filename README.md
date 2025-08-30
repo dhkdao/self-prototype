@@ -24,6 +24,10 @@ Getting Celo Alfajores testnet token
 - SelfVerification:
   Celo Alfajores Testnet: [`0x0Ea37D3264b940C94D68DA1EB34C291D62Ba8Ab5`](https://celo-alfajores.blockscout.com/address/0x0Ea37D3264b940C94D68DA1EB34C291D62Ba8Ab5)
 
+To test it out yourself, in the Self mobile app, add a Mock passport to scan. As Self contracts on testnet only support mock passport, while contracts on Celo mainnet support real passport.
+
+To generate a mock passport in Self, goto **Settings** > **Manage ID documents** > press **Add New Document** at the bottom, and choose mock passport.
+
 ## Demo
 
 - [demo video (web-side)](https://www.loom.com/share/9b7b2bc04d884c9ea24d934085a0ee79?sid=0473c41d-4c9c-48ff-92d7-895d2ef2623c)
