@@ -7,7 +7,7 @@ import {
   type Abi,
 } from "viem";
 import { optimism } from "viem/chains";
-import { erc20Abi } from "@/config";
+import { erc20Abi, thresholdTokenAmt } from "@/config";
 
 export async function POST(req: NextRequest) {
   const body = await req.json();
@@ -40,8 +40,7 @@ export async function POST(req: NextRequest) {
     const balance = BigInt(
       (await dhkTokenContract.read.balanceOf([sender])) as bigint,
     );
-    const voteThreshold =
-      BigInt(process.env.NEXT_PUBLIC_DHKTOKEN_THRESHOLD || "1") * decimals;
+    const voteThreshold = thresholdTokenAmt * decimals;
 
     // TODO: 3. check user has a DHK subname in https://app.namespace.ninja
     const senderHasSubname = true;
@@ -53,6 +52,7 @@ export async function POST(req: NextRequest) {
       status: "success",
       sender,
       result,
+      txHash,
       aboveTokenThreshold,
       hasSubname: senderHasSubname,
     });

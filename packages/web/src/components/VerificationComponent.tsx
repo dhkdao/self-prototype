@@ -3,13 +3,14 @@
 import React, { useState, useEffect } from "react";
 import { getUniversalLink } from "@selfxyz/core";
 import { ConnectKitButton } from "connectkit";
+import { useRouter } from "next/navigation";
 import {
   SelfAppBuilder,
   SelfQRcodeWrapper,
   type SelfApp,
 } from "@selfxyz/qrcode";
 import { clsx } from "clsx";
-import type { Log, Hash } from "viem";
+import type { Log } from "viem";
 import { useAccount, useConfig, useWatchContractEvent } from "wagmi";
 import { watchContractEvent } from "wagmi/actions";
 import {
@@ -22,21 +23,12 @@ import {
 } from "@headlessui/react";
 
 import { appName, selfVerificationContract } from "@/config";
-import type { Address } from "viem";
-
-type VerificationCompletedEventArgs = {
-  txHash: Hash;
-  sender: Address;
-  nationality: string;
-  times: number;
-  userData: string;
-};
-
-type EventLog = Log & { args: any };
+import type { VerificationCompletedEventArgs, EventLog } from "@/types";
 
 export default function VerificationComponent() {
   const account = useAccount();
   const config = useConfig();
+  const router = useRouter();
 
   const [selfApp, setSelfApp] = useState<SelfApp>();
   const [universalLink, setUniversalLink] = useState("");
@@ -144,17 +136,21 @@ export default function VerificationComponent() {
 
         if (!res.ok) throw new Error("API request failed");
 
-        console.log("result:", await res.json());
+        localStorage.setItem(
+          "verificationResult",
+          JSON.stringify(await res.json()),
+        );
+        router.push("/result");
       } catch (err) {
         console.error("Error calling verify-successful API:", err);
       }
     })();
-  }, [isFNCallback, evReceived]);
+  }, [isFNCallback, evReceived, router]);
 
   return (
     <>
       <div className="verification-container flex flex-col items-center">
-        <h1 className="text-lg/8 font-medium">DHK dao Self Prototype</h1>
+        <h1 className="text-lg/8 font-medium">{appName}</h1>
 
         <section className="flex flex-col items-center my-4">
           <p className="text-base/8">1. Sign in with your wallet</p>
