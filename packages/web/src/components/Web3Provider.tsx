@@ -7,15 +7,28 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { appName } from "@/config";
 
+const chains =
+  process.env.NODE_ENV === "development"
+    ? [foundry, celoAlfajores]
+    : [celoAlfajores];
+const transports =
+  process.env.NODE_ENV === "development"
+    ? {
+        [foundry.id]: webSocket("http://localhost:8545"),
+        [celoAlfajores.id]: webSocket(
+          `https://celo-alfajores.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
+        ),
+      }
+    : {
+        [celoAlfajores.id]: webSocket(
+          `https://celo-alfajores.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
+        ),
+      };
+
 export const ckConfig = getDefaultConfig({
   // Your dApps chains
-  chains: [foundry, celoAlfajores],
-  transports: {
-    [foundry.id]: webSocket("http://localhost:8545"),
-    [celoAlfajores.id]: webSocket(
-      `https://celo-alfajores.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
-    ),
-  },
+  chains,
+  transports,
 
   // Required API Keys
   walletConnectProjectId:

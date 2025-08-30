@@ -3,6 +3,7 @@
 import { useEffect, useState } from "react";
 import type { VerificationResult } from "@/types";
 import {
+  appName,
   alfajoresTxUrlPrefix,
   thresholdTokenAmt,
   opMainnetAddrUrlPrefix,
@@ -24,7 +25,7 @@ export default function VerificationResultPage() {
 
   return (
     <div className="verification-result-container flex flex-col items-center">
-      <h1 className="text-lg/8 font-medium">DHK dao Self Prototype</h1>
+      <h1 className="text-lg/8 font-medium">{appName}</h1>
 
       <section className="flex flex-col items-center my-4">
         <h1 className="text-base/8">Result</h1>

@@ -150,7 +150,7 @@ export default function VerificationComponent() {
   return (
     <>
       <div className="verification-container flex flex-col items-center">
-        <h1 className="text-lg/8 font-medium">DHK dao Self Prototype</h1>
+        <h1 className="text-lg/8 font-medium">{appName}</h1>
 
         <section className="flex flex-col items-center my-4">
           <p className="text-base/8">1. Sign in with your wallet</p>
