@@ -2,15 +2,16 @@
 
 import React from "react";
 import { WagmiProvider, createConfig, webSocket } from "wagmi";
-import { celoAlfajores } from "wagmi/chains";
+import { celoAlfajores, foundry } from "wagmi/chains";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
+import { appName } from "@/config";
 
 export const ckConfig = getDefaultConfig({
   // Your dApps chains
-  chains: [celoAlfajores],
+  chains: [foundry, celoAlfajores],
   transports: {
-    // RPC URL for each chain
+    [foundry.id]: webSocket("http://localhost:8545"),
     [celoAlfajores.id]: webSocket(
       `https://celo-alfajores.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
     ),
@@ -21,7 +22,7 @@ export const ckConfig = getDefaultConfig({
     process.env.NEXT_PUBLIC_WALLETCONNECT_PROJECT_ID || "",
 
   // Required App Info
-  appName: "DHK dao self-prototype",
+  appName,
 
   // Optional App Info
   appDescription: "DHK dao self-prototype",
