@@ -1,401 +1,401 @@
 {
-"abi": [
+  "abi": [
+    {
+      "type": "constructor",
+      "inputs": [
         {
-            "type": "constructor",
-            "inputs": [
-                {
-                    "name": "_identityVerificationHubV2Address",
-                    "type": "address",
-                    "internalType": "address"
-                },
-                {
-                    "name": "_scope",
-                    "type": "uint256",
-                    "internalType": "uint256"
-                },
-                {
-                    "name": "_verificationConfigId",
-                    "type": "bytes32",
-                    "internalType": "bytes32"
-                }
-            ],
-            "stateMutability": "nonpayable"
+          "name": "_identityVerificationHubV2Address",
+          "type": "address",
+          "internalType": "address"
         },
         {
-            "type": "function",
-            "name": "cancelOwnershipHandover",
-            "inputs": [],
-            "outputs": [],
-            "stateMutability": "payable"
+          "name": "_scope",
+          "type": "uint256",
+          "internalType": "uint256"
         },
         {
-            "type": "function",
-            "name": "completeOwnershipHandover",
-            "inputs": [
-                {
-                    "name": "pendingOwner",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ],
-            "outputs": [],
-            "stateMutability": "payable"
-        },
-        {
-            "type": "function",
-            "name": "getConfigId",
-            "inputs": [
-                {
-                    "name": "",
-                    "type": "bytes32",
-                    "internalType": "bytes32"
-                },
-                {
-                    "name": "",
-                    "type": "bytes32",
-                    "internalType": "bytes32"
-                },
-                {
-                    "name": "",
-                    "type": "bytes",
-                    "internalType": "bytes"
-                }
-            ],
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "bytes32",
-                    "internalType": "bytes32"
-                }
-            ],
-            "stateMutability": "view"
-        },
-        {
-            "type": "function",
-            "name": "isVerifiedHuman",
-            "inputs": [
-                {
-                    "name": "user",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ],
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "bool",
-                    "internalType": "bool"
-                }
-            ],
-            "stateMutability": "view"
-        },
-        {
-            "type": "function",
-            "name": "onVerificationSuccess",
-            "inputs": [
-                {
-                    "name": "output",
-                    "type": "bytes",
-                    "internalType": "bytes"
-                },
-                {
-                    "name": "userData",
-                    "type": "bytes",
-                    "internalType": "bytes"
-                }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable"
-        },
-        {
-            "type": "function",
-            "name": "owner",
-            "inputs": [],
-            "outputs": [
-                {
-                    "name": "result",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ],
-            "stateMutability": "view"
-        },
-        {
-            "type": "function",
-            "name": "ownershipHandoverExpiresAt",
-            "inputs": [
-                {
-                    "name": "pendingOwner",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ],
-            "outputs": [
-                {
-                    "name": "result",
-                    "type": "uint256",
-                    "internalType": "uint256"
-                }
-            ],
-            "stateMutability": "view"
-        },
-        {
-            "type": "function",
-            "name": "renounceOwnership",
-            "inputs": [],
-            "outputs": [],
-            "stateMutability": "payable"
-        },
-        {
-            "type": "function",
-            "name": "requestOwnershipHandover",
-            "inputs": [],
-            "outputs": [],
-            "stateMutability": "payable"
-        },
-        {
-            "type": "function",
-            "name": "scope",
-            "inputs": [],
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "uint256",
-                    "internalType": "uint256"
-                }
-            ],
-            "stateMutability": "view"
-        },
-        {
-            "type": "function",
-            "name": "setConfigId",
-            "inputs": [
-                {
-                    "name": "configId",
-                    "type": "bytes32",
-                    "internalType": "bytes32"
-                }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable"
-        },
-        {
-            "type": "function",
-            "name": "setScope",
-            "inputs": [
-                {
-                    "name": "newScope",
-                    "type": "uint256",
-                    "internalType": "uint256"
-                }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable"
-        },
-        {
-            "type": "function",
-            "name": "testVerificationCompletedEvent",
-            "inputs": [
-                {
-                    "name": "userId",
-                    "type": "address",
-                    "internalType": "address"
-                },
-                {
-                    "name": "nationality",
-                    "type": "string",
-                    "internalType": "string"
-                },
-                {
-                    "name": "userData",
-                    "type": "bytes",
-                    "internalType": "bytes"
-                }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable"
-        },
-        {
-            "type": "function",
-            "name": "transferOwnership",
-            "inputs": [
-                {
-                    "name": "newOwner",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ],
-            "outputs": [],
-            "stateMutability": "payable"
-        },
-        {
-            "type": "function",
-            "name": "verificationConfigId",
-            "inputs": [],
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "bytes32",
-                    "internalType": "bytes32"
-                }
-            ],
-            "stateMutability": "view"
-        },
-        {
-            "type": "function",
-            "name": "verifiedHumans",
-            "inputs": [
-                {
-                    "name": "",
-                    "type": "address",
-                    "internalType": "address"
-                }
-            ],
-            "outputs": [
-                {
-                    "name": "",
-                    "type": "uint32",
-                    "internalType": "uint32"
-                }
-            ],
-            "stateMutability": "view"
-        },
-        {
-            "type": "function",
-            "name": "verifySelfProof",
-            "inputs": [
-                {
-                    "name": "proofPayload",
-                    "type": "bytes",
-                    "internalType": "bytes"
-                },
-                {
-                    "name": "userContextData",
-                    "type": "bytes",
-                    "internalType": "bytes"
-                }
-            ],
-            "outputs": [],
-            "stateMutability": "nonpayable"
-        },
-        {
-            "type": "event",
-            "name": "OwnershipHandoverCanceled",
-            "inputs": [
-                {
-                    "name": "pendingOwner",
-                    "type": "address",
-                    "indexed": true,
-                    "internalType": "address"
-                }
-            ],
-            "anonymous": false
-        },
-        {
-            "type": "event",
-            "name": "OwnershipHandoverRequested",
-            "inputs": [
-                {
-                    "name": "pendingOwner",
-                    "type": "address",
-                    "indexed": true,
-                    "internalType": "address"
-                }
-            ],
-            "anonymous": false
-        },
-        {
-            "type": "event",
-            "name": "OwnershipTransferred",
-            "inputs": [
-                {
-                    "name": "oldOwner",
-                    "type": "address",
-                    "indexed": true,
-                    "internalType": "address"
-                },
-                {
-                    "name": "newOwner",
-                    "type": "address",
-                    "indexed": true,
-                    "internalType": "address"
-                }
-            ],
-            "anonymous": false
-        },
-        {
-            "type": "event",
-            "name": "ScopeUpdated",
-            "inputs": [
-                {
-                    "name": "newScope",
-                    "type": "uint256",
-                    "indexed": true,
-                    "internalType": "uint256"
-                }
-            ],
-            "anonymous": false
-        },
-        {
-            "type": "event",
-            "name": "VerificationCompleted",
-            "inputs": [
-                {
-                    "name": "sender",
-                    "type": "address",
-                    "indexed": true,
-                    "internalType": "address"
-                },
-                {
-                    "name": "nationality",
-                    "type": "string",
-                    "indexed": true,
-                    "internalType": "string"
-                },
-                {
-                    "name": "times",
-                    "type": "uint32",
-                    "indexed": false,
-                    "internalType": "uint32"
-                },
-                {
-                    "name": "userData",
-                    "type": "bytes",
-                    "indexed": false,
-                    "internalType": "bytes"
-                }
-            ],
-            "anonymous": false
-        },
-        {
-            "type": "error",
-            "name": "AlreadyInitialized",
-            "inputs": []
-        },
-        {
-            "type": "error",
-            "name": "InvalidDataFormat",
-            "inputs": []
-        },
-        {
-            "type": "error",
-            "name": "NewOwnerIsZeroAddress",
-            "inputs": []
-        },
-        {
-            "type": "error",
-            "name": "NoHandoverRequest",
-            "inputs": []
-        },
-        {
-            "type": "error",
-            "name": "Unauthorized",
-            "inputs": []
-        },
-        {
-            "type": "error",
-            "name": "UnauthorizedCaller",
-            "inputs": []
+          "name": "_verificationConfigId",
+          "type": "bytes32",
+          "internalType": "bytes32"
         }
-    ]
+      ],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "cancelOwnershipHandover",
+      "inputs": [],
+      "outputs": [],
+      "stateMutability": "payable"
+    },
+    {
+      "type": "function",
+      "name": "completeOwnershipHandover",
+      "inputs": [
+        {
+          "name": "pendingOwner",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "payable"
+    },
+    {
+      "type": "function",
+      "name": "getConfigId",
+      "inputs": [
+        {
+          "name": "",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        },
+        {
+          "name": "",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        },
+        {
+          "name": "",
+          "type": "bytes",
+          "internalType": "bytes"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "isVerifiedHuman",
+      "inputs": [
+        {
+          "name": "user",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bool",
+          "internalType": "bool"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "onVerificationSuccess",
+      "inputs": [
+        {
+          "name": "output",
+          "type": "bytes",
+          "internalType": "bytes"
+        },
+        {
+          "name": "userData",
+          "type": "bytes",
+          "internalType": "bytes"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "owner",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "result",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "ownershipHandoverExpiresAt",
+      "inputs": [
+        {
+          "name": "pendingOwner",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "result",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "renounceOwnership",
+      "inputs": [],
+      "outputs": [],
+      "stateMutability": "payable"
+    },
+    {
+      "type": "function",
+      "name": "requestOwnershipHandover",
+      "inputs": [],
+      "outputs": [],
+      "stateMutability": "payable"
+    },
+    {
+      "type": "function",
+      "name": "scope",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "setConfigId",
+      "inputs": [
+        {
+          "name": "configId",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "setScope",
+      "inputs": [
+        {
+          "name": "newScope",
+          "type": "uint256",
+          "internalType": "uint256"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "testVerificationCompletedEvent",
+      "inputs": [
+        {
+          "name": "userId",
+          "type": "address",
+          "internalType": "address"
+        },
+        {
+          "name": "nationality",
+          "type": "string",
+          "internalType": "string"
+        },
+        {
+          "name": "userData",
+          "type": "bytes",
+          "internalType": "bytes"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "function",
+      "name": "transferOwnership",
+      "inputs": [
+        {
+          "name": "newOwner",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "payable"
+    },
+    {
+      "type": "function",
+      "name": "verificationConfigId",
+      "inputs": [],
+      "outputs": [
+        {
+          "name": "",
+          "type": "bytes32",
+          "internalType": "bytes32"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "verifiedHumans",
+      "inputs": [
+        {
+          "name": "",
+          "type": "address",
+          "internalType": "address"
+        }
+      ],
+      "outputs": [
+        {
+          "name": "",
+          "type": "uint32",
+          "internalType": "uint32"
+        }
+      ],
+      "stateMutability": "view"
+    },
+    {
+      "type": "function",
+      "name": "verifySelfProof",
+      "inputs": [
+        {
+          "name": "proofPayload",
+          "type": "bytes",
+          "internalType": "bytes"
+        },
+        {
+          "name": "userContextData",
+          "type": "bytes",
+          "internalType": "bytes"
+        }
+      ],
+      "outputs": [],
+      "stateMutability": "nonpayable"
+    },
+    {
+      "type": "event",
+      "name": "OwnershipHandoverCanceled",
+      "inputs": [
+        {
+          "name": "pendingOwner",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "OwnershipHandoverRequested",
+      "inputs": [
+        {
+          "name": "pendingOwner",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "OwnershipTransferred",
+      "inputs": [
+        {
+          "name": "oldOwner",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        },
+        {
+          "name": "newOwner",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "ScopeUpdated",
+      "inputs": [
+        {
+          "name": "newScope",
+          "type": "uint256",
+          "indexed": true,
+          "internalType": "uint256"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "event",
+      "name": "VerificationCompleted",
+      "inputs": [
+        {
+          "name": "sender",
+          "type": "address",
+          "indexed": true,
+          "internalType": "address"
+        },
+        {
+          "name": "nationality",
+          "type": "string",
+          "indexed": true,
+          "internalType": "string"
+        },
+        {
+          "name": "times",
+          "type": "uint32",
+          "indexed": false,
+          "internalType": "uint32"
+        },
+        {
+          "name": "userData",
+          "type": "bytes",
+          "indexed": false,
+          "internalType": "bytes"
+        }
+      ],
+      "anonymous": false
+    },
+    {
+      "type": "error",
+      "name": "AlreadyInitialized",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "InvalidDataFormat",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "NewOwnerIsZeroAddress",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "NoHandoverRequest",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "Unauthorized",
+      "inputs": []
+    },
+    {
+      "type": "error",
+      "name": "UnauthorizedCaller",
+      "inputs": []
+    }
+  ]
 }

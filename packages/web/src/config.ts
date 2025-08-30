@@ -7,4 +7,4 @@ export const selfVerificationContract = {
   abi: SelfVerificationABI.abi as Abi,
 };
 
-export const appName = "DHK dao Identity Verification"
+export const appName = "DHK dao Identity Verification";

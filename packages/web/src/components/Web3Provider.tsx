@@ -9,7 +9,7 @@ import { appName } from "@/config";
 
 export const ckConfig = getDefaultConfig({
   // Your dApps chains
-  chains: [celoAlfajores],
+  chains: [foundry, celoAlfajores],
   transports: {
     [foundry.id]: webSocket("http://localhost:8545"),
     [celoAlfajores.id]: webSocket(
