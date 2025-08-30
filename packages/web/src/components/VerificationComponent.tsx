@@ -9,7 +9,7 @@ import {
   type SelfApp,
 } from "@selfxyz/qrcode";
 import { clsx } from "clsx";
-import type { Log } from "viem";
+import type { Log, Hash } from "viem";
 import { useAccount, useConfig, useWatchContractEvent } from "wagmi";
 import { watchContractEvent } from "wagmi/actions";
 import {
@@ -25,6 +25,7 @@ import { appName, selfVerificationContract } from "@/config";
 import type { Address } from "viem";
 
 type VerificationCompletedEventArgs = {
+  txHash: Hash;
   sender: Address;
   nationality: string;
   times: number;
@@ -60,8 +61,11 @@ export default function VerificationComponent() {
       }
 
       // Extract the event arguments out
-      const args = (logs[logs.length - 1] as unknown as EventLog)
-        .args as VerificationCompletedEventArgs;
+      const lastLog = logs[logs.length - 1] as unknown as EventLog;
+      const args = {
+        txHash: lastLog.transactionHash,
+        ...lastLog.args,
+      };
       setEvReceived(args);
     },
   });
@@ -140,7 +144,7 @@ export default function VerificationComponent() {
 
         if (!res.ok) throw new Error("API request failed");
 
-        console.log("result:", res.json());
+        console.log("result:", await res.json());
       } catch (err) {
         console.error("Error calling verify-successful API:", err);
       }
