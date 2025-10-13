@@ -43,6 +43,7 @@ export default function VerificationComponent() {
     address: selfVerificationContract.address,
     abi: selfVerificationContract.abi,
     eventName: "VerificationCompleted",
+    chainId: 11142220, // Celo Sepolia chain id
     onLogs(logs: Log[]) {
       // Use the last log only
       if (logs.length > 1) {
@@ -133,7 +134,6 @@ export default function VerificationComponent() {
           },
           body: JSON.stringify(ev),
         });
-
         if (!res.ok) throw new Error("API request failed");
 
         localStorage.setItem(

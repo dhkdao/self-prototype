@@ -1,30 +1,27 @@
 "use client";
 
 import React from "react";
-import { WagmiProvider, createConfig, webSocket } from "wagmi";
-import { celoAlfajores, foundry } from "wagmi/chains";
+import { WagmiProvider, createConfig, http } from "wagmi";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ConnectKitProvider, getDefaultConfig } from "connectkit";
 import { type Chain } from "viem";
 import { appName } from "@/config";
 
-const chains =
-  process.env.NODE_ENV === "development"
-    ? ([foundry, celoAlfajores] as const)
-    : ([celoAlfajores] as const);
-
-const transports: Record<number, ReturnType<typeof webSocket>> = {
-  [foundry.id]: process.env.NODE_ENV === "development"
-    ? webSocket("http://localhost:8545")
-    : undefined as unknown as ReturnType<typeof webSocket>,
-  [celoAlfajores.id]: webSocket(
-    `https://celo-alfajores.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
-  ),
+// Celo Sepolia custom chain (testnet)
+const celoSepolia: Chain = {
+  id: 11142220,
+  name: "Celo Sepolia",
+  nativeCurrency: { name: "CELO", symbol: "CELO", decimals: 18 },
+  rpcUrls: {
+    default: { http: ["https://forno.celo-sepolia.celo-testnet.org"] },
+    public: { http: ["https://forno.celo-sepolia.celo-testnet.org"] },
+  },
 };
-// Remove undefined keys (for production)
-Object.keys(transports).forEach(
-  (key) => transports[key as unknown as number] === undefined && delete transports[key as unknown as number]
-);
+
+const chains = [celoSepolia] as const;
+const transports: Record<number, ReturnType<typeof http>> = {
+  [celoSepolia.id]: http("https://forno.celo-sepolia.celo-testnet.org" as string),
+};
 
 export const ckConfig = getDefaultConfig({
   // Your dApps chains
